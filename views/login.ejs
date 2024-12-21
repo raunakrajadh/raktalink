@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="RaktaLink">
+    <meta name="description" content="Find blood.">
+
+    <title>Login</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="../assets/web/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/web/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/web/css/swiper.css" rel="stylesheet">
+	<link href="../assets/web/css/magnific-popup.css" rel="stylesheet">
+	<link href="../assets/web/css/styles.css" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+	<%- include('./_loader.ejs') %>
+    <%- include('./_navbar.ejs') %>
+
+    <br><br><br><br>
+
+    <div id="request" class="form-1">
+        <div class="container">
+
+            <div class="text-container">
+                <h2 style="text-align: center;">Login to RaktaLink</h2>
+            </div>
+
+            <div class="text-container">
+                <form method="post" action="/login?nextpage=<%= nextPage %>" data-toggle="validator" data-focus="false">
+
+                    <strong>Email</strong><br><br>
+                    <div class="form-group">
+                        <input type="email" class="form-control-input" id="email" name="email" required>
+                        <label class="label-control" for="email">example@mail.com</label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <strong>Password</strong><br><br>
+                    <div class="form-group">
+                        <input type="password" class="form-control-input" id="password" name="password" required>
+                        <label class="label-control" for="password"></label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <p>
+                        Dont have an account? <a href="/register">Register</a>
+                    </p>
+
+                    <div class="form-group">
+                        <button type="submit" class="form-control-submit-button">Login</button>
+                    </div>
+
+                    <p style="text-align: center; color: red; font-weight: bold; margin-top: 20px;"><%= warning %></p>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    	
+    <script src="../assets/web/js/jquery.min.js"></script>
+    <script src="../assets/web/js/popper.min.js"></script>
+    <script src="../assets/web/js/bootstrap.min.js"></script>
+    <script src="../assets/web/js/jquery.easing.min.js"></script>
+    <script src="../assets/web/js/swiper.min.js"></script>
+    <script src="../assets/web/js/jquery.magnific-popup.js"></script>
+    <script src="../assets/web/js/validator.min.js"></script>
+    <script src="../assets/web/js/scripts.js"></script>
+</body>
+</html>

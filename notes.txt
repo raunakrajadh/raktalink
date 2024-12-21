@@ -1,0 +1,25 @@
+JtSRfCfHqB8Ge8vg
+Home
+Blood Banks
+Register your campaign
+Need Blood?
+
+const { Schema, model } = require('mongoose');
+
+module.exports = model('campaign', 
+    new Schema({
+        name: { type: String, required: true },
+        image: { data: Buffer, contentType: String, require: false },
+        date: { type: String, require: true },
+        time: { type: String, require: true },
+        venue: { type: String, require: true },
+        link: { type: String, require: true },
+        description: { type: String, require: true },
+    })
+);
+
+                        <!-- <div class="form-group">
+                            <input type="" class="form-control-input" id="" name="">
+                            <label class="label-control" for="link">O-</label>
+                            <div class="help-block with-errors"></div>
+                        </div> -->

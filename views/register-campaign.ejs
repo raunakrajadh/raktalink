@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="RaktaLink">
+    <meta name="description" content="Find blood.">
+
+    <title>RaktaLink</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="../assets/web/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/web/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/web/css/swiper.css" rel="stylesheet">
+	<link href="../assets/web/css/magnific-popup.css" rel="stylesheet">
+	<link href="../assets/web/css/styles.css" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+	<%- include('./_loader.ejs') %>
+    <%- include('./_navbar.ejs') %>
+
+    <br><br><br><br>
+
+    <div id="request" class="form-1">
+        <div class="container">
+
+            <div class="text-container">
+                <h2 style="text-align: center;">Register your blood donation campaign.</h2><br><br>
+
+            <div class="text-container">
+                <form method="post" action="/register-campaign" enctype="multipart/form-data" data-toggle="validator" data-focus="false">
+
+                    <strong>Campaign's name:</strong><br><br>
+                    <div class="form-group">
+                        <input type="text" class="form-control-input" id="name" name="name" maxlength="50" required>
+                        <label class="label-control" for="name">Name</label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <strong>Upload a photo for the post:</strong><br><br>
+                    <div class="form-group">
+                        <input type="file" class="imagePreview" id="pic" name="pic" accept=".jpeg, .jpg, .png, .gif, image/jpeg, image/png, image/gif" required>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img class="imagePreview" id="preview" alt="Image preview will appear here">
+                        <br>
+                        <small>Accepted formats: JPEG, PNG, GIF</small>
+                        <div class="help-block with-errors"></div>
+                    </div>                    
+
+                    <strong>Date of the event:</strong><br><br>
+                    <div class="form-group">
+                        <input type="date" class="form-control-input" id="date" name="date" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    
+                    <strong>Time of the event:</strong><br><br>
+                    <div class="form-group">
+                        <input type="text" class="form-control-input" id="time" name="time" maxlength="50" required>
+                        <label class="label-control" for="time">ex. 11 am - 4 pm</label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <strong>Venue:</strong><br><br>
+                    <div class="form-group">
+                        <input type="text" class="form-control-input" id="venue" name="venue" maxlength="50" required>
+                        <label class="label-control" for="venue">ex. New road,Kathmandu</label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    
+                    <strong>Give link to your campaign:</strong><br><br>
+                    <div class="form-group">
+                        <input type="url" class="form-control-input" id="link" name="link" maxlength="50" required>
+                        <label class="label-control" for="link">https://yourcampaignwebsite.com</label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    
+                    <strong>Write a description of the campaign.</strong><br><br>
+                    <div class="form-group">
+                        <textarea class="form-control-input" style="height: 150px;" id="description" name="description" minlength="150" maxlength="1000" required></textarea>
+                        <label class="label-control" for="description">Min. 150 words</label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="form-control-submit-button">POST YOUR CAMPAIGN</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    	
+    <script src="../assets/web/js/jquery.min.js"></script>
+    <script src="../assets/web/js/popper.min.js"></script>
+    <script src="../assets/web/js/bootstrap.min.js"></script>
+    <script src="../assets/web/js/jquery.easing.min.js"></script>
+    <script src="../assets/web/js/swiper.min.js"></script>
+    <script src="../assets/web/js/jquery.magnific-popup.js"></script>
+    <script src="../assets/web/js/validator.min.js"></script>
+    <script src="../assets/web/js/scripts.js"></script>
+
+    <script>
+        
+        document.getElementById('pic').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+    
+            if (file) {
+                const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!validImageTypes.includes(file.type)) {
+                    alert('Please upload a valid image file (JPEG, PNG, or GIF).');
+                    fileInput.value = '';
+                    document.getElementById('preview').style.display = 'none';
+                    return;
+                }
+    
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const previewImage = document.getElementById('preview');
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+    
+                reader.readAsDataURL(file); 
+            } else {
+                document.getElementById('preview').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

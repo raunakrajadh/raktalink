@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="RaktaLink">
+    <meta name="description" content="Find blood.">
+ 
+
+    <title>RaktaLink</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="../assets/web/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/web/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/web/css/swiper.css" rel="stylesheet">
+	  <link href="../assets/web/css/magnific-popup.css" rel="stylesheet">
+	  <link href="../assets/web/css/styles.css" rel="stylesheet">
+	
+    <!-- <link rel="icon" href="../assets/web/images/RaktaLink_ROUND.png"> -->
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <%- include('./_loader.ejs') %>
+    <%- include('./_navbar.ejs') %>
+    
+    <header id="header" class="header" style="background-image: none;">
+        <div class="header-content">
+            <div class="container">
+                
+            <% if(bloodbanks.length){ %>
+                <div class="container">
+                    <div class="text-container">
+                        <h2 style="text-align: center;">Available Blood Banks in <%= address %> with <%= amount %> millilitres or more of <%= bloodgroup %> Blood.</h2><br><br>        
+                    </div> 
+                </div>
+                <br><br><br>
+    
+                <% bloodbanks.forEach((bank, index) => { %>
+    
+                    <div class="row" style="background-color: whitesmoke">
+                        <% if (index % 2 === 0) { %>
+                            <!-- Image first, details second -->
+                            <div class="col-lg-6" style="margin-bottom: 80px;">
+                                <br><br><br><br>
+                                <div class="image-container">
+                                    <img class="img-fluid" src="<%= `data:${bank.image.contentType};base64,${bank.image.data.toString('base64')}` %>" alt="alternative" style="height: 300px; width: auto;">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="text-container">
+                                    <h2><%= bank.name %></h2>
+                                    <p>
+                                        <span><b>Address: <%= bank.address %></b></span><br>
+                                        <span><b>Contact: <%= bank.contact %></b></span><br>
+                                        <span><b>Blood Group: <%= bloodgroup %></b></span><br>
+                                        <span><b>Available Blood: <%= bank[bloodName[bloodgroup]] %> litres</b></span><br>
+                                    </p>
+                                    <a class="btn-solid-lg page-scroll" href="<%= bank.link %>">View Bank's Website</a>
+                                    <a class="btn-solid-lg page-scroll" href="mailto:<%= bank.contact_email %>">Send Mail</a>
+                                </div>
+                                <br><br><br><br>
+                            </div>
+                        <% } else { %>
+                            <!-- Details first, image second -->
+                            <div class="col-lg-6" style="margin-bottom: 80px;">
+                                <div class="text-container">
+                                    <h2><%= bank.name %></h2>
+                                    <p>
+                                        <span><b>Address: <%= bank.address %></b></span><br>
+                                        <span><b>Contact: <%= bank.contact %></b></span><br>
+                                        <span><b>Blood Group: <%= bloodgroup %></b></span><br>
+                                        <span><b>Available Blood: <%= bank[bloodName[bloodgroup]] %> litres</b></span><br>
+                                    </p>
+                                    <a class="btn-solid-lg page-scroll" href="<%= bank.link %>">View Bank's Website</a>
+                                    <a class="btn-solid-lg page-scroll" href="mailto:<%= bank.contact_email %>">Send Mail</a>
+                                </div>
+                                <br><br><br><br>
+                            </div>
+                            <div class="col-lg-6">
+                                <br><br><br><br>
+                                <div class="image-container">
+                                    <img class="img-fluid" src="<%= `data:${bank.image.contentType};base64,${bank.image.data.toString('base64')}` %>" alt="alternative" style="height: 300px; width: auto;">
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                
+                    <br>
+                    
+                <% }) %> 
+            <% } else { %>
+                <div class="container">
+                    <div class="text-container">
+                        <h2 style="text-align: center;">Unfortunately we could not find any Blood Banks in <%= address %> with <%= amount %> millilitres or more of <%= bloodgroup %> Blood.</h2><br><br>        
+                    </div> 
+                </div>
+                <br><br><br>
+            <% } %>           
+
+            </div>
+        </div>
+    </header>
+  	
+<script src="../assets/web/js/jquery.min.js"></script>
+<script src="../assets/web/js/popper.min.js"></script>
+<script src="../assets/web/js/bootstrap.min.js"></script>
+<script src="../assets/web/js/jquery.easing.min.js"></script>
+<script src="../assets/web/js/swiper.min.js"></script>
+<script src="../assets/web/js/jquery.magnific-popup.js"></script>
+<script src="../assets/web/js/validator.min.js"></script>
+<script src="../assets/web/js/scripts.js"></script>
+
+</body>
+</html>

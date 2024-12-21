@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="RaktaLink">
+    <meta name="description" content="Find blood.">
+
+    <title>RaktaLink</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="../assets/web/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/web/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/web/css/swiper.css" rel="stylesheet">
+	<link href="../assets/web/css/magnific-popup.css" rel="stylesheet">
+	<link href="../assets/web/css/styles.css" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+	<%- include('./_loader.ejs') %>
+    <%- include('./_navbar.ejs') %>
+
+    <br><br><br><br>
+
+    <div id="request" class="form-1">
+        <div class="container">
+
+            <div class="text-container">
+                <h2 style="text-align: center;">Register your blood bank.</h2><br><br>
+
+            <div class="text-container">
+                <form method="post" action="/register-blood-bank" enctype="multipart/form-data"  data-toggle="validator" data-focus="false">
+
+                    <div id="first_form" style="display: block; text-align: left;">
+                        <strong>Blood Bank's name:</strong><br><br>
+                        <div class="form-group">
+                            <input type="text" class="form-control-input" id="name" name="name" required>
+                            <label class="label-control" for="name">Name</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+    
+                        <strong>Upload your logo:</strong><br><br>
+                        <div class="form-group">
+                            <input type="file" class="imagePreview" id="pic" name="pic" accept=".jpeg, .jpg, .png, .gif, image/jpeg, image/png, image/gif" required>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <img class="imagePreview" id="preview" alt="Image preview will appear here">
+                            <br>
+                            <small>Accepted formats: JPEG, PNG, GIF</small>
+                            <div class="help-block with-errors"></div>
+                        </div>                 
+    
+                        <strong>Address:</strong><br><br>
+                        <div class="form-group">
+                            <select class="form-control" id="address" name="address" required>
+                                <option value="" disabled selected>Select your area</option>
+                                <% for(const location of locations){ %>
+                                    <option value="<%- location %>"><%= location %></option>
+                                <% } %>
+                                <%  %>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+    
+                        <strong>Contact:</strong><br><br>
+                        <div class="form-group">
+                            <input type="tel" class="form-control-input" id="contact" name="contact" maxlength="50" required>
+                            <label class="label-control" for="contact">ex: +98012*****</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <strong>Email:</strong><br><br>
+                        <div class="form-group">
+                            <input type="email" class="form-control-input" id="contact_email" name="contact_email" maxlength="50" required>
+                            <label class="label-control" for="contact_email">yourmail@mail.com</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        
+                        <strong>Website Link:</strong><br><br>
+                        <div class="form-group">
+                            <input type="url" class="form-control-input" id="link" name="link" maxlength="50" required>
+                            <label class="label-control" for="link">https://syourbankwebsite.com</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" onclick="document.getElementById('first_form').style = 'display: none'; document.getElementById('second_form').style = 'display: block'" class="form-control-submit-button">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="second_form" style="display: none;">
+
+                        <h4>Amount of blood currently available in your blood bank:</h4><br><br>
+
+                        <!-- A+ -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="a_plus" 
+                                    id="a_plus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'a_plus_value')">
+                            </div>
+                            <label class="label-control" for="a_plus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">A+</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="a_plus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- A- -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="a_minus" 
+                                    id="a_minus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'a_minus_value')">
+                            </div>
+                            <label class="label-control" for="a_minus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">A-</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="a_minus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- B+ -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="b_plus" 
+                                    id="b_plus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'b_plus_value')">
+                            </div>
+                            <label class="label-control" for="b_plus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">B+</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="b_plus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- B- -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="b_minus" 
+                                    id="b_minus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'b_minus_value')">
+                            </div>
+                            <label class="label-control" for="b_minus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">B-</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="b_minus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- AB+ -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="ab_plus" 
+                                    id="ab_plus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'ab_plus_value')">
+                            </div>
+                            <label class="label-control" for="ab_plus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">AB+</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="ab_plus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- AB- -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="ab_minus" 
+                                    id="ab_minus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'ab_minus_value')">
+                            </div>
+                            <label class="label-control" for="ab_minus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">AB-</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="ab_minus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- O+ -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="o_plus" 
+                                    id="o_plus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'o_plus_value')">
+                            </div>
+                            <label class="label-control" for="o_plus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">O+</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="o_plus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <!-- O- -->
+                        <div class="form-group">
+                            <div class="form-control-input">
+                                <input 
+                                    type="range" 
+                                    name="o_minus" 
+                                    id="o_minus" 
+                                    class="slider" 
+                                    min="0" 
+                                    max="5000" 
+                                    step="1" 
+                                    value="0" 
+                                    oninput="updateValue(this, 'o_minus_value')">
+                            </div>
+                            <label class="label-control" for="o_minus" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">O-</span>
+                                <span style="position: absolute; right: 0;">Amount: <span id="o_minus_value">0</span> Litres</span>
+                            </label>
+                        </div>
+                        
+                        <script>
+                            function updateValue(slider, valueId) {
+                                document.getElementById(valueId).innerText = slider.value;
+                            }
+                        </script>                                  
+
+                        <div class="form-group">
+                            <button onclick="document.getElementById('first_form').style = 'display: block; text-align: left;'; document.getElementById('second_form').style = 'display: none'" class="form-control-submit-button">Back</button>
+                            <br><br>
+                            <button type="submit" class="form-control-submit-button">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    	
+    <script src="../assets/web/js/jquery.min.js"></script>
+    <script src="../assets/web/js/popper.min.js"></script>
+    <script src="../assets/web/js/bootstrap.min.js"></script>
+    <script src="../assets/web/js/jquery.easing.min.js"></script>
+    <script src="../assets/web/js/swiper.min.js"></script>
+    <script src="../assets/web/js/jquery.magnific-popup.js"></script>
+    <script src="../assets/web/js/validator.min.js"></script>
+    <script src="../assets/web/js/scripts.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+        text-align: center;
+        margin: 50px;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+    .slider-container {
+        width: 100%;
+        padding: 20px;
+    	border: 1px solid #c4d8dc;
+    	border-radius: 0.25rem;
+    	background-color: #fff;
+    	color: #626262;
+    	font: 400 0.875rem/1.875rem "Raleway", sans-serif;
+    	transition: all 0.2s;
+    }
+    .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 300px;
+        height: 8px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+        opacity: 0.9;
+        transition: opacity 0.2s;
+    }
+    .slider:hover {
+        opacity: 1;
+    }
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #b16feb;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #b16feb;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<script>
+        
+    document.getElementById('pic').addEventListener('change', function (event) {
+        const fileInput = event.target;
+        const file = fileInput.files[0];
+
+        if (file) {
+            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!validImageTypes.includes(file.type)) {
+                alert('Please upload a valid image file (JPEG, PNG, or GIF).');
+                fileInput.value = '';
+                document.getElementById('preview').style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const previewImage = document.getElementById('preview');
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file); 
+        } else {
+            document.getElementById('preview').style.display = 'none';
+        }
+    });
+</script>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="RaktaLink">
+    <meta name="description" content="Find blood.">
+ 
+
+    <title>RaktaLink</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="../assets/web/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/web/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/web/css/swiper.css" rel="stylesheet">
+	  <link href="../assets/web/css/magnific-popup.css" rel="stylesheet">
+	  <link href="../assets/web/css/styles.css" rel="stylesheet">
+	
+    <!-- <link rel="icon" href="../assets/web/images/RaktaLink_ROUND.png"> -->
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+	<%- include('./_loader.ejs') %>
+  <%- include('./_navbar.ejs') %>
+
+  <header id="header" class="header">
+    <div class="header-content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <h1><span class="turquoise">RaktaLink</span><br>Need blood?</h1>
+                        <p style="color: black;" class="p-large">Find blood at your access point at RaktaLink.</p>
+                        <a class="btn-solid-lg page-scroll" href="/need-blood"
+                        style="
+                            background: linear-gradient(45deg, #ff4d4d, #ff0000);
+                            color: white;
+                            border: none;
+                            border-radius: 30px;
+                            font-weight: bold;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                            transition: transform 0.3s, box-shadow 0.3s;
+                            text-align: center;
+                        "
+                        onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                        >Need Blood?</a>
+                        &nbsp;&nbsp;
+                        <a class="btn-solid-lg page-scroll" href="/register-campaign">Register Your Blood Campaign</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="image-container">
+                        <img class="img-fluid" src="../assets/web/images/raktalink-logo.png" alt="alternative">
+                    </div> 
+                </div> 
+            </div>
+
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+
+            <% campaigns.forEach((campaign, index) => { %>
+
+                <div class="row" style="background-color: whitesmoke">
+                    <% if (index % 2 === 0) { %>
+                        <!-- Image first, details second -->
+                        <div class="col-lg-6">
+                            <br><br><br><br>
+                            <div class="image-container">
+                                <img class="img-fluid" src="<%= `data:${campaign.image.contentType};base64,${campaign.image.data.toString('base64')}` %>" alt="alternative" style="height: 300px; width: auto;">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="text-container">
+                                <h2><%= campaign.name %></h2>
+                                <p>
+                                    <span><b>Venue: <%= campaign.venue %></b></span><br>
+                                    <span><b>Date: <%= campaign.date %></b></span><br>
+                                    <span><b>Time: <%= campaign.time %></b></span><br>
+                                    <%= campaign.description %>
+                                </p>
+                                <a class="btn-solid-lg page-scroll" href="<%= campaign.link %>">View campaign</a>
+                            </div>
+                            <br><br><br><br>
+                        </div>
+                    <% } else { %>
+                        <!-- Details first, image second -->
+                        <div class="col-lg-6">
+                            <div class="text-container">
+                                <h2><%= campaign.name %></h2>
+                                <p>
+                                    <span><b>Venue: <%= campaign.venue %></b></span><br>
+                                    <span><b>Date: <%= campaign.date %></b></span><br>
+                                    <span><b>Time: <%= campaign.time %></b></span><br>
+                                    <%= campaign.description %>
+                                </p>
+                                <a class="btn-solid-lg page-scroll" href="<%= campaign.link %>">View campaign</a>
+                            </div>
+                            <br><br><br><br>
+                        </div>
+                        <div class="col-lg-6">
+                            <br><br><br><br>
+                            <div class="image-container">
+                                <img class="img-fluid" src="<%= `data:${campaign.image.contentType};base64,${campaign.image.data.toString('base64')}` %>" alt="alternative" style="height: 300px; width: auto;">
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            
+                <br>
+                
+            <% }) %>            
+
+        </div>
+    </div>
+  </header>
+  	
+    <script src="../assets/web/js/jquery.min.js"></script>
+    <script src="../assets/web/js/popper.min.js"></script>
+    <script src="../assets/web/js/bootstrap.min.js"></script>
+    <script src="../assets/web/js/jquery.easing.min.js"></script>
+    <script src="../assets/web/js/swiper.min.js"></script>
+    <script src="../assets/web/js/jquery.magnific-popup.js"></script>
+    <script src="../assets/web/js/validator.min.js"></script>
+    <script src="../assets/web/js/scripts.js"></script>
+</body>
+</html>

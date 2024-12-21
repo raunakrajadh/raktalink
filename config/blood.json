@@ -1,0 +1,19 @@
+{
+    "a_plus": "A+",
+    "a_minus": "A-",
+    "b_plus": "B+",
+    "b_minus": "B-",
+    "ab_plus": "AB+",
+    "ab_minus": "AB-",
+    "o_plus": "O+",
+    "o_minus": "O-",
+    
+    "A+": "a_plus",
+    "A-": "a_minus",
+    "B+": "b_plus",
+    "B-": "b_minus",
+    "AB+": "ab_plus",
+    "AB-": "ab_minus",
+    "O+": "o_plus",
+    "O-": "o_minus"
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="RaktaLink">
+    <meta name="description" content="Find blood.">
+
+    <title>RaktaLink</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="../assets/web/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/web/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/web/css/swiper.css" rel="stylesheet">
+	<link href="../assets/web/css/magnific-popup.css" rel="stylesheet">
+	<link href="../assets/web/css/styles.css" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+	<%- include('./_loader.ejs') %>
+    <%- include('./_navbar.ejs') %>
+
+    <br><br><br><br>
+
+    <div id="request" class="form-1">
+        <div class="container">
+
+            <div class="text-container">
+                <h2 style="text-align: center;">Search blood group availability</h2><br><br>
+
+                <div class="text-container">
+                    <form method="post" action="/need-blood" data-toggle="validator" data-focus="false">
+
+                        <strong>Blood Group:</strong><br><br>
+                        <div class="form-group">
+                            <select class="form-control" id="bloodgroup" name="bloodgroup" required>
+                                <option value="" disabled selected>Select your blood group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>     
+                        <strong>Your Area:</strong><br><br>               
+                        <div class="form-group">
+                            <select class="form-control" id="address" name="address" required>
+                                <option value="" disabled selected>Select your area</option>
+                                <% for(const location of locations){ %>
+                                    <option value="<%- location %>"><%= location %></option>
+                                <% } %>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div> 
+                        <strong>Amount in millilitres:</strong><br><br>
+                        <div class="form-group">
+                            <input type="number" class="form-control-input" id="amount" name="amount" maxlength="50" required>
+                            <label class="label-control" for="amount" style="width: 90%;">
+                                <span style="position: absolute; left: 0;">Amount</span>
+                                <span style="position: absolute; right: 0;">in millilitres.</span>
+                            </label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="form-control-submit-button"
+                            style="
+                                background: linear-gradient(45deg, #ff4d4d, #ff0000);
+                                color: white;
+                                border: none;
+                                border-radius: 30px;
+                                font-weight: bold;
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                                transition: transform 0.3s, box-shadow 0.3s;
+                                text-align: center;
+                            "
+                            onmouseover="this.style.transform='scale(1.01)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                            >Search Available Blood Banks</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    	
+    <script src="../assets/web/js/jquery.min.js"></script>
+    <script src="../assets/web/js/popper.min.js"></script>
+    <script src="../assets/web/js/bootstrap.min.js"></script>
+    <script src="../assets/web/js/jquery.easing.min.js"></script>
+    <script src="../assets/web/js/swiper.min.js"></script>
+    <script src="../assets/web/js/jquery.magnific-popup.js"></script>
+    <script src="../assets/web/js/validator.min.js"></script>
+    <script src="../assets/web/js/scripts.js"></script>
+</body>
+</html>
