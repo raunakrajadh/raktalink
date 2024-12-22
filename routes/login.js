@@ -14,7 +14,7 @@ app.post('/', async (req, res) => {
     let nextPage = 'home'
     if(req.query.nextpage) nextPage = req.query.nextpage;
 
-    if(req.cookies.loggedIn) return res.redirect('/')
+    if(req.cookies.loggedIn) return res.redirect(`/${nextPage}`)
 
     const email = req.body.email;
     const password = req.body.password;
